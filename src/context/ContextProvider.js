@@ -5,7 +5,6 @@ const API = process.env.REACT_APP_BACKEND;
 
 const reducer = (state, action) => {
     if (action.type === 'category-selected') {
-        console.log('slele');
         return { ...state, category: action.payload, isAll:false, isCategorySelected: true, isSearched: false }; 
     }
     if (action.type === 'All') {

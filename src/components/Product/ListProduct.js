@@ -8,8 +8,12 @@ function ListProduct() {
     const [temp, settemp] = useState('')
     const [searchedProducts, setSearchedProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
+   
     const loadAllProducts = async () => {
-        const Products = await fetchContext.get('/products');
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
+        console.log(user_data._id);
+        const Products = await fetchContext.get(`/products/${user_data._id}`);
+        console.log(Products)
         setProducts(Products);
     }
 
@@ -20,22 +24,24 @@ function ListProduct() {
 
     
     useEffect(() => {
-        console.log('dd')
+        if (fetchContext.selectedState.searched && fetchContext.selectedState.isSearched)
         fetchSearch();
-    }, [fetchContext.selectedState.searched]);
+    }, [fetchContext.selectedState.searched,fetchContext.selectedState.isSearched]);
 
     useEffect(() => {
-        const newArray = products;
+        const newArray = [...products];
         console.log(fetchContext.selectedState.category);
         setSelectedProducts(newArray.filter(item => item.category.category_name === fetchContext.selectedState.category))
-    }, [fetchContext.selectedState.category]);
+    }, [fetchContext.selectedState.category,fetchContext.selectedState.isCategorySelected]);
 
 
     const fetchSearch = async () => {
         const searchedFor = fetchContext.selectedState.searched;
         fetchContext.cache.clear();
         console.log(searchedFor);
-        const SearchedProducts = await fetchContext.get(`/products/${searchedFor}`);
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
+        const SearchedProducts = await fetchContext.get(`/products/${searchedFor}/${user_data._id}`);
+        console.log(SearchedProducts);
         setSearchedProducts(SearchedProducts);
     }
 
@@ -44,7 +50,10 @@ function ListProduct() {
         return (  <div className='listwarpper'>
            
             {
-                fetchContext.selectedState.isAll ? (<p>Available products</p>): (<p>Searched for {fetchContext.selectedState.searched}</p>) 
+                fetchContext.selectedState.isAll ? (<p>Available products</p>) : <p>Results
+                    {fetchContext.selectedState.isSearched && <span>for {fetchContext.selectedState.searched}</span>}
+                    {fetchContext.selectedState.isCategorySelected && <span>for {fetchContext.selectedState.category }</span>}
+                </p>
                
             }
 
@@ -55,13 +64,13 @@ function ListProduct() {
                 {
                     fetchContext.selectedState.isAll ?
                         products.length > 0 && products.map(product => (
-                            <ProductItem key={product._id} state={product} temp={temp} />
+                            <ProductItem status='all' products={products} setProduct={setProducts} key={product._id} state={product} temp={temp} />
                         )
                     ) : fetchContext.selectedState.isSearched ?
                     
                     searchedProducts.length > 0 && searchedProducts.map(product =>
                        (
-                            <ProductItem key={product._id} state={product} />
+                        <ProductItem status='search' products={searchedProducts} setSearchedProducts={setSearchedProducts} key={product._id} state={product} />
                         )
                    )
                     : <></>
@@ -73,7 +82,7 @@ function ListProduct() {
                     fetchContext.selectedState.isCategorySelected ?
                         (selectedProducts.length > 0 && selectedProducts.map(product =>
                                     (
-                                        <ProductItem key={product._id} state={product} />
+                                        <ProductItem status='all'  products={products} setProduct={setProducts} key={product._id} state={product} />
                                     )
                                 )
                             ):<></>

@@ -10,8 +10,10 @@ function AddCategory() {
         const [name, setname] = useState('')
         const submitHandler = async (event) => {
             event.preventDefault();
+            const user_data = await JSON.parse(localStorage.getItem('login-cred'));
             const categoryInfo = {
-                category_name: name 
+                category_name: name,
+                category_id:user_data._id 
             }
             fetchContext.cache.clear();
             await fetchContext.post('/addcategory', categoryInfo);

@@ -14,8 +14,8 @@ function Addproduct() {
     const [category, setCategory] = useState([]);
     const [options, setoptions] = useState([])
     const retrieveCategory = async () => {
-       
-         const categories = await fetchContext.get('/categories');
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
+         const categories = await fetchContext.get(`/categories/${user_data._id}`);
         setCategory(categories)
     }
     useEffect(() => {
@@ -31,16 +31,19 @@ function Addproduct() {
     }, [category])
     const submitHandler = async(event) => {
         event.preventDefault();
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
         const productinfo = {
             product_name: product_name,
             stock: stock,
             mrp: mrp,
-            category : selectedCatgory 
+            category: selectedCatgory,
+            product_id : user_data._id
         }
         if (selectedCatgory === '') {
             alert('Please select a ctegory');
             return 
         }
+        
         fetchContext.cache.clear();
         await fetchContext.post('/addproduct', productinfo);
        

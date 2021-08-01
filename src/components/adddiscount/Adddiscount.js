@@ -15,13 +15,14 @@ function Adddiscount() {
     const [selectedProducts, setSelectedProducts] = useState([]);
 
     const retrieveCategory = async () => {
-
-        const categories = await fetchContext.get('/categories');
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
+        const categories = await fetchContext.get(`/categories/${user_data._id}`);
         setCategory(categories)
     }
 
     const loadAllProducts = async () => {
-        const Products = await fetchContext.get('/products');
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
+        const Products = await fetchContext.get(`/products/${user_data._id}`);
         setProducts(Products);
     }
     useEffect(() => {
@@ -46,21 +47,23 @@ function Adddiscount() {
     
     //useEffect to search from searchbar 
     useEffect(() => {
+        if (fetchContext.selectedState.searched && fetchContext.selectedState.isSearched)
         fetchSearch();
-    }, [fetchContext.selectedState.searched]);
+    }, [fetchContext.selectedState.searched,fetchContext.selectedState.isSearched]);
 
     //useEffect to load products by selecting 
     useEffect(() => {
-        const newArray = products;
+        const newArray = [...products];
         console.log(fetchContext.selectedState.category);
         setSelectedProducts(newArray.filter(item => item.category.category_name === fetchContext.selectedState.category))
-    }, [fetchContext.selectedState.category]);
+    }, [fetchContext.selectedState.category,fetchContext.selectedState.isCategorySelected]);
 
     const fetchSearch = async () => {
         const searchedFor = fetchContext.selectedState.searched;
         fetchContext.cache.clear();
         console.log(searchedFor);
-        const SearchedProducts = await fetchContext.get(`/products/${searchedFor}`);
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
+        const SearchedProducts = await fetchContext.get(`/products/${searchedFor}/${user_data._id}`);
         setSearchedProducts(SearchedProducts);
     }
     const handleChange = (data) => {
@@ -90,7 +93,13 @@ function Adddiscount() {
                     </div>
                     <div className='discountloadproduct'>
                         <p className='headerproduct'>
-                            Products
+                            {
+                                fetchContext.selectedState.isAll ? (<p>Available products</p>) : <p>Results
+                                {fetchContext.selectedState.isSearched && <span>for {fetchContext.selectedState.searched}</span>}
+                                {fetchContext.selectedState.isCategorySelected && <span>for {fetchContext.selectedState.category }</span>}
+                                </p>
+                            }
+                            
                         </p>
 
                         <div className="loadproductlistcontainer">

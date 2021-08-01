@@ -1,7 +1,20 @@
-import { InformationCircleIcon } from '@heroicons/react/solid'
-function ProductItem({state}) {
+import { InformationCircleIcon } from '@heroicons/react/solid';
+import { useState } from 'react';
+import DeletModal from '../modals/DeleteModal';
+import EditProductModal from '../modals/EditProductModel';
+import ProductInfoModal from '../modals/ProductInfoModal';
+function ProductItem({ state,status,
+    setProduct,
+    products,
+    setSearchedProducts }) {
+    const [infoModal, setinfoModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
+    const [deletMoal, setDeleteModal] = useState(false);
     return (
         <div className="productItemwrapper">
+            {infoModal && <ProductInfoModal state={state} setinfoModal={setinfoModal} />}
+            {editModal && <EditProductModal state={state} products={products} status={status}  setSearchedProducts={setSearchedProducts} setProduct ={setProduct}   setOpenMpdal={setEditModal}/>}
+            {deletMoal && <DeletModal setOpenModal={setDeleteModal} state={state}/>}
             <div> <span className='sno'> </span>{state.product_name}</div>
             <div className='sellingdetail'>
                 <span> Stock: {state.stock}</span>
@@ -13,9 +26,9 @@ function ProductItem({state}) {
                
             </div>
             <div className='btnwrapper'>
-                <button>Info</button>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={e => { setinfoModal(true) }}>Info</button>
+                <button onClick={e => { setEditModal(true) }}>Edit</button>
+                <button onClick={e => { setDeleteModal(true) }}>Delete</button>
 
             </div>
         </div>

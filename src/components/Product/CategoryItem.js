@@ -4,11 +4,15 @@ import context from '../../context/create-context';
 function CategoryItem({ state }) {
     const contextStore = useContext(context); 
     const handleClick = () => {
+        
         if (state.category_name === 'All Product') {
             contextStore.dispatch({ type: 'All' });
-            return;
+          
+        } else {
+          
+            contextStore.dispatch({ type: 'category-selected', payload: state.category_name });
         }
-        contextStore.dispatch({ type: 'category-selected', payload: state.category_name });
+        
     }
 
     return (

@@ -6,8 +6,9 @@ function LoadCategories() {
     const [categories, setCategories] = useState([]);
     
     const loadCategories = async () => {
-        const returnedCategories = await fetchContext.get('/categories');
-        setCategories(returnedCategories);
+        const user_data = await JSON.parse(localStorage.getItem('login-cred'));
+        const returnCategory = await fetchContext.get(`/categories/${user_data._id}`);
+        setCategories(returnCategory);
     }
     useEffect(() => {
         loadCategories();
