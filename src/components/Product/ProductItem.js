@@ -14,7 +14,7 @@ function ProductItem({ state,status,
         <div className="productItemwrapper">
             {infoModal && <ProductInfoModal state={state} setinfoModal={setinfoModal} />}
             {editModal && <EditProductModal state={state} products={products} status={status}  setSearchedProducts={setSearchedProducts} setProduct ={setProduct}   setOpenMpdal={setEditModal}/>}
-            {deletMoal && <DeletModal setOpenModal={setDeleteModal} state={state}/>}
+            {deletMoal && <DeletModal state={state} products={products} status={status}  setSearchedProducts={setSearchedProducts} setProduct ={setProduct}   setOpenMpdal={setEditModal}setOpenModal={setDeleteModal} />}
             <div> <span className='sno'> </span>{state.product_name}</div>
             <div className='sellingdetail'>
                 <span> Stock: {state.stock}</span>

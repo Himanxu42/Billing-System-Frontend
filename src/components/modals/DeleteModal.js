@@ -2,8 +2,13 @@ import Modal from 'react-modal'
 import React, { useState,useContext } from 'react';
 import Context from '../../context/create-context';
 
-function DeletModal({ state,
-    setOpenModal
+function DeletModal({ 
+    state,
+    setOpenMpdal,
+    status,
+    setProduct,
+    setSearchedProducts
+    ,products
 }) {
      
 
@@ -16,7 +21,7 @@ function DeletModal({ state,
 
     function closeModal() {
         setIsOpen(false);
-        setOpenModal(false);
+        setOpenMpdal(false);
       }
     
     const deleteProduct = async () => {
@@ -24,8 +29,16 @@ function DeletModal({ state,
         const responseBackend = await fetchContext.delete(`/delete/${state._id}`);
         if (fetchContext.response.ok) {
             //success 
+            if (status === 'all') {
+                
+                setProduct(products=>products.filter(product => product._id !== state._id))
+            }
+            if (status === 'search') {
+                setSearchedProducts(copyArray => copyArray.filter(item=>item._id!==state._id));
+            }
             alert('Sccessfully deleted');
-            setOpenModal(false);
+            setOpenMpdal(false);
+
         }
         else {
             alert('Deleteion failed');
@@ -71,7 +84,7 @@ function DeletModal({ state,
                             cursor: 'pointer',
                             
                     }}
-                 onClick = {e=>{ setOpenModal(false)}}    
+                 onClick = {e=>{ setOpenMpdal(false)}}    
                 >NO</button>
                    </div>
                 
