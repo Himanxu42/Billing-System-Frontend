@@ -1,0 +1,35 @@
+.resultswrapper{
+    width:250px;
+    margin-top: 40px;
+    background-color: #fff;
+    height:500px; 
+    margin-left: 150px; 
+    border-radius:10px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.resultswrapper p{
+    background-color: rgb(155, 150, 150);
+     border-top-left-radius: 10px;
+     border-top-right-radius: 10px;
+     padding:10px;
+     font-size: 18px;
+     color:#fff;
+     font-weight: bold;
+     margin: 0;
+}
+.productlistresult {
+    height:54vh; 
+    margin: 0;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+}
+
+.productlistresult span {
+    padding: 10px; 
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px dotted rgb(155, 150, 150);
+}
+
+

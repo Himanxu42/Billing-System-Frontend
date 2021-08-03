@@ -10,6 +10,7 @@ import Login from './components/Authentication/Login';
 import ContextProvider from './context/ContextProvider';
 import ProtectedRoutes from './components/Authentication/helper/ProtectedRoutes'
 import NotFound from './components/NotFound';
+import Receipt from './components/bills/Receipt';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         <ProtectedRoutes path='/home' exact component={Products}/>
         <ProtectedRoutes path='/addproducts' exact component={Addproduct} />
         <ProtectedRoutes path='/addcategory' exact component={AddCategory} />
-        <ProtectedRoutes path='/adddiscount' exact component={Adddiscount} />
+          <ProtectedRoutes path='/adddiscount' exact component={Adddiscount} />
+          <ProtectedRoutes path='/receipt' exact component={Receipt} />
         </ContextProvider>
         <Route component={NotFound} />
       </Switch>
