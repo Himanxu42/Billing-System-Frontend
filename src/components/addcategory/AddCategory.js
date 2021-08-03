@@ -30,7 +30,7 @@ function AddCategory() {
                     <h4 style={{ textAlign: 'center' }}>Add Category Detail</h4>
                     <div className='categoryfield' >
                         <p>Category Name</p>
-                        <input onChange ={e=>{setname(e.target.value)}} type='text' name='category_name' />
+                        <input onChange={e => { setname(e.target.value) }} type='text' name='category_name' autoComplete='off' />
                         <button>Add Category</button>
                     </div>
                 </form>

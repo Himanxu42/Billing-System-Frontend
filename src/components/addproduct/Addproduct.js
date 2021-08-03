@@ -67,7 +67,7 @@ function Addproduct() {
                     <h4 style={{ textAlign: 'center' }}>Insert Product details</h4>
                     <div className='productfield' >
                         <p>Product Name</p>
-                        <input required onChange={e => { setproduct_name(e.target.value) }} type='text' name='product_name' />
+                        <input required autoComplete='off' onChange={e => { setproduct_name(e.target.value) }} type='text' name='product_name' />
                         <p>Select Category</p>
                         <Select
                             className="select"
@@ -76,9 +76,9 @@ function Addproduct() {
                             options={options}
                         />
                         <p>Stock</p>
-                        <input required onChange={e=>{setstock(e.target.value)}} type='Number' name='product_name' />
+                        <input autoComplete='off' required onChange={e=>{setstock(e.target.value)}} type='Number' name='product_name' />
                         <p>MRP(Rs)</p>
-                        <input required onChange={e=>{setmrp(e.target.value)}} type="Number" step="0.01" name='mrp' />
+                        <input autoComplete='off' required onChange={e=>{setmrp(e.target.value)}} type="Number" step="0.01" name='mrp' />
                         <button>Add Product</button>
                     </div>
                 </form>
