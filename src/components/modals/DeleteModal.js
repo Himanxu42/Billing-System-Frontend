@@ -4,7 +4,7 @@ import Context from '../../context/create-context';
 
 function DeletModal({ 
     state,
-    setOpenMpdal,
+    setOepnModal,
     status,
     setProduct,
     setSearchedProducts
@@ -14,14 +14,12 @@ function DeletModal({
 
     const fetchContext = useContext(Context);
     const [isOpen, setIsOpen] = useState(true);
-    function openModal() {
-      setIsOpen(true);
-    }
+    
   
 
     function closeModal() {
         setIsOpen(false);
-        setOpenMpdal(false);
+        setOepnModal(false);
       }
     
     const deleteProduct = async () => {
@@ -37,11 +35,11 @@ function DeletModal({
                 setSearchedProducts(copyArray => copyArray.filter(item=>item._id!==state._id));
             }
             alert('Sccessfully deleted');
-            setOpenMpdal(false);
+            setOepnModal(false);
 
         }
         else {
-            alert('Deleteion failed');
+            alert('Deletetion failed');
         }
      }
     return (
@@ -84,7 +82,7 @@ function DeletModal({
                             cursor: 'pointer',
                             
                     }}
-                 onClick = {e=>{ setOpenMpdal(false)}}    
+                 onClick = {e=>{ setOepnModal(false)}}    
                 >NO</button>
                    </div>
                 

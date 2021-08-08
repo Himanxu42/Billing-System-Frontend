@@ -1,4 +1,5 @@
 import './innernav.css'
+import {Link} from 'react-router-dom'
 function InnerNav() {
     return (
         <div style={{
@@ -6,8 +7,9 @@ function InnerNav() {
             marginTop: '10px',
             justifyContent:'space-evenly'
         }}>
-            <button className='btninnernav'>Receipt</button>
-            <button className='btninnernav'>Orders</button>
+            <Link to='/receipt'> <button className='btninnernav'>Receipt</button></Link>
+            <Link to='/order'> <button className='btninnernav'>Orders</button></Link>
+           
         </div>
     )
 }

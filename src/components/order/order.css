@@ -1,0 +1,36 @@
+.loadreceipt-container{
+    background-color: #fff;
+    width: 600px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-left: 400px;
+    margin-top:15px;
+    padding:10px;
+}
+
+.innerItemStyle{
+    font-family:'popins';
+    display: flex;
+    margin-top: 2px;
+    font-size:20px; 
+    padding:5px;
+    background-color:rgb(245, 209, 215);
+    border-radius:2px;
+    cursor:pointer;
+    align-items:center;
+    justify-content:space-evenly;
+}
+.pdfdownload{
+    display:flex;
+    align-items: center;
+    margin: 0 auto;
+    margin-top:10px;
+    background-color:#fff;
+   border:none;
+   cursor: pointer;
+   padding:4px;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+   
+}
+.pdficonn {
+color: red;
+}
