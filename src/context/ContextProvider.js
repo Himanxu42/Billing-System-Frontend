@@ -4,6 +4,10 @@ import { useReducer } from 'react';
 const API = process.env.REACT_APP_BACKEND;
 
 const reducer = (state, action) => {
+    if(action.type==='reload') { 
+        console.log(!state.reload)
+        return {...state, reload:!state.reload}
+    }
     if (action.type === 'category-selected') {
         return { ...state, category: action.payload, isAll:false, isCategorySelected: true, isSearched: false }; 
     }
@@ -14,6 +18,7 @@ const reducer = (state, action) => {
     if (action.type === 'searched') {
         return { ...state, searched:action.payload, isAll:false,isCategorySelected: false, isSearched: true };
     }
+ 
 }
 
 
@@ -23,7 +28,8 @@ function ContextProvider(props) {
         searched: '' ,
         isCategorySelected: false,
         isSearched: false,
-        isAll : true 
+        isAll : true ,
+        reload: false,
     }
     const [selectedState, dispatch] = useReducer(reducer, initialState)
     const { get, post, del, response, data,cache } = useFetch(API);

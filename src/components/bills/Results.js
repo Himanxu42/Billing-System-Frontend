@@ -52,13 +52,13 @@ function Results({search }) {
                 </p>
                 <div className='productlistresult'>
                     {products.length > 0 && products.map((item) => (
-                        <span className='resultproductname' onClick={e=>{updateSelectedProd(item)}}>{item.product_name}</span>
+                        <span key={item._id} className='resultproductname' onClick={e=>{updateSelectedProd(item)}}>{item.product_name}</span>
                     ))}
                   
                 </div>
             </div>
             <div>
-                <Product products={selectedProd} total={total} setTotal={setTotal} setProducts={setSelectedProd} set_ids={setSelected_id}/>
+                <Product  products={selectedProd} total={total} setTotal={setTotal} setProducts={setSelectedProd} ids={selected_id} set_ids={setSelected_id}/>
             </div>
         </div>
     )
